@@ -1,0 +1,30 @@
+{
+  "name": "assteroid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "satinxs",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/pixi.js": "^4.8.0",
+    "browser-sync": "^2.24.7",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-better-rollup": "^3.3.0",
+    "gulp-htmlmin": "^4.0.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-size": "^3.0.0",
+    "gulp-uglify": "^3.0.1",
+    "rollup-plugin-buble": "^0.19.2",
+    "rollup-plugin-commonjs": "^9.1.6",
+    "rollup-plugin-node-resolve": "^3.4.0"
+  },
+  "dependencies": {
+    "pixi-particles": "^3.1.0",
+    "pixi.js": "^4.8.2"
+  }
+}
