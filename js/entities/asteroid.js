@@ -2,9 +2,11 @@ import PIXI from 'pixi.js/dist/pixi';
 import { testCollision, random, randomBool, Random, average, createRandomPoly } from '../utilities';
 import Entity from './Entity';
 import { AsteroidExplosion } from './particles';
+import ShieldItem from './shieldItem';
 
 export default class Asteroid extends Entity {
-    constructor(system, radius, sides) {
+    constructor(system, radius, sides, size) {
+        this.size = size || 2;
         this.radius = radius || Random.integer(30, 40);
         this.sides = sides || Random.integer(5, 8);
         super(game.resources.asteroid.texture, system);
@@ -35,14 +37,9 @@ export default class Asteroid extends Entity {
         this.mask = gfx;
         this.addChild(gfx);
 
-        this.rotationSpeed = Random.real(0.01, 0.2);//Math.random() / 8;
+        this.rotationSpeed = Random.real(0.01, 0.2);
 
         this.pivot.set(this.width / 2, this.height / 2);
-
-        this.size = 2;
-
-        // let scale = Random.real(0.3, 0.5);// Math.floor(random(3, 5)) / 10;
-        // this.scale.set(scale, scale);
 
         this.hitArea = new PIXI.Circle(this.pivot.x, this.pivot.y, this.radius * 0.9);
 
@@ -65,6 +62,15 @@ export default class Asteroid extends Entity {
     }
 
     breakDown() {
+        if (this.hasShield) {
+            let shieldItem = new ShieldItem(this.system);
+
+            shieldItem.x = this.x;
+            shieldItem.y = this.y;
+            this.system.add(shieldItem);
+            this.parent.addChild(shieldItem);
+        }
+
         if (this.size > 1) {
             this.size--;
 

@@ -56,6 +56,8 @@ ready(function () {
         .add("fire", "resources/fire.png")
         .add("explosion", "resources/explosion.png")
         .add("bullet", "resources/bullet.png")
+        .add("shield", "resources/shield2.png")
+        .add("bubble", "resources/bubble.png")
         .load((_, resources) => {
             game.resources = resources;
 

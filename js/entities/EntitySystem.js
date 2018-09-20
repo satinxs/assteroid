@@ -3,6 +3,11 @@ import { testCollision } from '../utilities';
 export default class EntitySystem {
     constructor() {
         this.entities = [];
+        this.collisionCallbacks = [];
+    }
+
+    onCollision(fn) {
+        this.collisionCallbacks.push(fn);
     }
 
     add(entity) {
@@ -48,13 +53,14 @@ export default class EntitySystem {
                     continue;
 
                 if (testCollision(entity, queue[i])) {
-                    if (window.debugCollision)
-                        debugger;
-
-                    if (entity.collide)
+                    if (entity.collide) {
                         entity.collide(queue[i]);
-                    else if (queue[i].collide)
+                        this.collisionCallbacks.forEach(fn => fn(entity, queue[i]));
+                    }
+                    else if (queue[i].collide) {
                         queue[i].collide(entity);
+                        this.collisionCallbacks.forEach(fn => fn(entity, queue[i]));
+                    }
                 }
             }
         }
